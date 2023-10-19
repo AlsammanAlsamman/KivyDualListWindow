@@ -54,9 +54,17 @@
                         size_hint_x: 0.1
                         on_release: root.search(TargetSearch.text, SourceBox)
                     TextInput:
+                        size_hint_x: 0.8
                         id: TargetSearch
                         multiline: False
-                        hint_text: 'Search for pattern (regex supported)'
+                        hint_text: 'Search (regex supported) / press X to undo'
+                    Button:
+                        # undo
+                        text: 'X'
+                        # red color
+                        size_hint_x: 0.1
+                        background_color: 1, 0, 0, 1
+                        on_release: root.UndoSearch(SourceBox)
                         
             BoxLayout:
                 orientation: 'vertical'
@@ -68,22 +76,12 @@
                     Rectangle:
                         pos: self.pos
                         size: self.size
-                Label:
-                    size_hint_y: 0.2715
-                    text: ''
                 Button:
                     text: '>>'
                     on_release: root.MoveItemToTarget(SourceBox, TargetBox)
                 Button:
                     text: '<<'
                     on_release: root.MoveItemToSource(SourceBox, TargetBox)
-                Button:
-                    # undo
-                    text: 'X'
-                    # red color
-                    background_color: 1, 0, 0, 1
-                    on_release: root.UndoSearch(SourceBox)
-
             BoxLayout:
                 size: root.size
                 orientation: 'vertical'

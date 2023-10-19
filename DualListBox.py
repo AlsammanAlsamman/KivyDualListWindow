@@ -66,6 +66,10 @@ class DualListBox(Widget):
             child.ids.ItemButton.background_color = (0.753, 0.753, 0.753, 1)
             # # change the pressed state
             child.pressed = False
+        # remove from the SourceList if it is exist
+        for child in chicked.values():
+            if child in self.SourceList:
+                self.SourceList.remove(child)
 
     def MoveItemToSource(self, SourceBox, TargetBox):
         chicked = {}
