@@ -8,8 +8,6 @@
 # This script is not intended for commercial use                                                    #
 #####################################################################################################
 
-# HIIII
-
 # kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
