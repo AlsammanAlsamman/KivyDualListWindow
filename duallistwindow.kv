@@ -2,134 +2,129 @@
 
 <DualListBox>:
     GridLayout:
-        cols:1
-        rows:2
-        # fill the whole screen
+        cols: 3
+        rows: 1
         size: root.size
-        GridLayout:
-            cols: 3
-            rows: 1
+        BoxLayout:
+            # size: root.size
+            orientation: 'vertical'
+            size_hint_y: 1
+            canvas.before:
+                Color: #blue
+                    rgba: 0.678, 0.847, 0.8, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                size_hint_y: 0.1
+                text: root.SourceLabel
+                # black font
+                color: 0, 0, 0, 1
+            ScrollView:
+                pos: 0, 0
+                scroll_type: ['bars', 'content']
+                # canvas.before:
+                #     Color: #light grey
+                #         rgba: 0.753, 0.753, 0.753, 1
+                #     Rectangle:
+                #         pos: self.pos
+                #         size: self.size
+                do_scroll_x: False
+                do_scroll_y: True
+                # size: root.size
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: 1
+                    spacing: 1
+                    id: SourceBox
             BoxLayout:
-                size: root.size
-                orientation: 'vertical'
-                size_hint_y: None
-                # height: 100
-                # light blue
-                canvas.before:
-                    Color: #blue
-                        rgba: 0.678, 0.847, 0.8, 1
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-                Label:
-                    size_hint_y: 0.1
-                    text: "Source"
-                    color: 0, 0, 0, 1
-                ScrollView:
-                    pos: 0, 0
-                    # scroll_y:
-                    size_hint_y: 0.9
-                    scroll_type: ['bars', 'content']
-                    # canvas.before:
-                    #     Color: #light grey
-                    #         rgba: 0.753, 0.753, 0.753, 1
-                    #     Rectangle:
-                    #         pos: self.pos
-                    #         size: self.size
-                    do_scroll_x: False
-                    do_scroll_y: True
-                    # size: root.size
-                    GridLayout:
-                        cols: 1
-                        size_hint_y: self.minimum_height
-                        padding: 1
-                        spacing: 1
-                        id: SourceBox
-                        
-                BoxLayout:
-                    orientation: 'horizontal'
-                    size_hint_y: 0.1
-                    Button:
-                        text: '>'
-                        size_hint_x: 0.1
-                        on_release: root.search(TargetSearch.text, SourceBox)
-                    TextInput:
-                        size_hint_x: 0.8
-                        id: TargetSearch
-                        multiline: False
-                        hint_text: 'Search (regex supported) / press X to undo'
-                    Button:
-                        # undo
-                        text: 'X'
-                        # red color
-                        size_hint_x: 0.1
-                        background_color: 1, 0, 0, 1
-                        on_release: root.UndoSearch(SourceBox)
-                        
-            BoxLayout:
-                orientation: 'vertical'
-                size_hint_x: 0.1
-                # grey color
-                canvas.before:
-                    Color: #light grey
-                        rgba: 0.753, 0.753, 0.753, 1
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
+                orientation: 'horizontal'
+                size_hint_y: 0.1
                 Button:
-                    text: '>>'
-                    on_release: root.MoveItemToTarget(SourceBox, TargetBox)
+                    text: '>'
+                    size_hint_x: 0.1
+                    on_release: root.search(TargetSearch.text, SourceBox)
+                TextInput:
+                    size_hint_x: 0.8
+                    id: TargetSearch
+                    multiline: False
+                    hint_text: 'Search (regex supported) / press X to undo'
                 Button:
-                    text: '<<'
-                    on_release: root.MoveItemToSource(SourceBox, TargetBox)
-            BoxLayout:
-                size: root.size
-                orientation: 'vertical'
-                size_hint_y: None
-                # height: 100
-                # light green
+                    # undo
+                    text: 'X'
+                    # red color
+                    size_hint_x: 0.1
+                    background_color: 1, 0, 0, 1
+                    on_release: root.UndoSearch(SourceBox)
+                    
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: 0.1
+            # grey color
+            canvas.before:
+                Color: #light grey
+                    rgba: 0.753, 0.753, 0.753, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                # color
+                background_color: 0.7, 0.3, 0, 1
+                text: '>>'
+                on_release: root.MoveItemToTarget(SourceBox, TargetBox)
+            Button:
+                text: '<<'
+                background_color: 0.1, 0.3, 0.1, 1
+                on_release: root.MoveItemToSource(SourceBox, TargetBox)
+
+        BoxLayout:
+            # size: root.size
+            size_hint_y: 1
+            orientation: 'vertical'
+            canvas.before:
+                Color: #light green
+                    rgba: 0.678, 0.847, 0.902, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                size_hint_y: 0.1
+                text: root.TargetLabel
+                # black font
+                color: 0, 0, 0, 1
+            ScrollView:
+                pos: 0, 0
+                scroll_y: 1
+                scroll_type: ['bars', 'content']
                 canvas.before:
                     Color: #light green
                         rgba: 0.678, 0.847, 0.902, 1
                     Rectangle:
                         pos: self.pos
                         size: self.size
-                Label:
-                    size_hint_y: 0.1
-                    text: "Target"
-                    # black font
-                    color: 0, 0, 0, 1
-                ScrollView:
-                    pos: 0, 0
-                    scroll_y: 1
-                    scroll_type: ['bars', 'content']
-                    canvas.before:
-                        Color: #light green
-                            rgba: 0.678, 0.847, 0.902, 1
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-                    do_scroll_x: False
-                    do_scroll_y: True
-                    # size: root.size
-                    GridLayout:
-                        cols: 1
-                        size_hint_y: self.minimum_height
-                        padding: 1
-                        spacing: 1
-                        id: TargetBox
-                BoxLayout:
-                    orientation: 'horizontal'
-                    size_hint_y: 0.12
-                    Button:
-                        text: '+'
-                        size_hint_x: 0.12
-                        size_hint_x: 0.1
-                        on_release: root.AddItemToTarget(TargetBox,TargetAdd)
-                    TextInput:
-                        id: TargetAdd
-                        multiline: False
-                        hint_text: 'Add New Item'
+                do_scroll_x: False
+                do_scroll_y: True
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: 1
+                    spacing: 1
+                    id: TargetBox
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.1
+                Button:
+                    text: '+'
+                    size_hint_x: 0.12
+                    size_hint_x: 0.1
+                    on_release: root.AddItemToTarget(TargetBox,TargetAdd)
+                TextInput:
+                    id: TargetAdd
+                    multiline: False
+                    hint_text: 'Add New Item'
 
                 
                     

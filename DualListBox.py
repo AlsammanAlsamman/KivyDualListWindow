@@ -38,7 +38,25 @@ class BoxItem(BoxLayout):
 class DualListBox(Widget):
     # List of the items in the SourceBox for backup  
     SourceList = []
+    TargetLabel = StringProperty()
+    SourceLabel = StringProperty()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # if the user did not set the TargetLabel
+        if not self.TargetLabel:
+            self.TargetLabel = 'Target'
+        # if the user did not set the SourceLabel
+        if not self.SourceLabel:
+            self.SourceLabel = 'Source'
+                # add 100 buttons to the TargetBox
+        # for i in range(100):
+        #     self.ids.TargetBox.add_widget(BoxItem(ItemLabel=str(i),  size_hint_y=None, height=40, ItemSource=self.ids.TargetBox))
+        #add '99' buttons to the TargetBox
+        self.ids.TargetBox.add_widget(BoxItem(ItemLabel=str('1'),  size_hint_y=None, height=40, ItemSource=self.ids.TargetBox))
 
+        # add 100 buttons to the SourceBox
+        for i in range(100):
+            self.ids.SourceBox.add_widget(BoxItem(ItemLabel=str(i),  size_hint_y=None, height=40, ItemSource=self.ids.SourceBox))
     def MoveItemToTarget(self, SourceBox, TargetBox):
         chicked = {}
         TargetItems = []
@@ -52,7 +70,6 @@ class DualListBox(Widget):
             if child.pressed:
                 ## add the child to the chicked
                 chicked[child.ItemLabel] = child
-        
         # move the chicked to the TargetBox
         for child in chicked.values():
             # # remove the child from the SourceBox
@@ -148,19 +165,6 @@ class DualListBox(Widget):
             TargetBox.add_widget(newItem)
             # clear the text input
             TargetAdd.text = ''
-        
-            
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        # add 100 buttons to the TargetBox
-        # for i in range(100):
-        #     self.ids.TargetBox.add_widget(BoxItem(ItemLabel=str(i),  size_hint_y=None, height=40, ItemSource=self.ids.TargetBox))
-        #add '99' buttons to the TargetBox
-        self.ids.TargetBox.add_widget(BoxItem(ItemLabel=str('1'),  size_hint_y=None, height=40, ItemSource=self.ids.TargetBox))
-
-        # add 100 buttons to the SourceBox
-        for i in range(100):
-            self.ids.SourceBox.add_widget(BoxItem(ItemLabel=str(i),  size_hint_y=None, height=40, ItemSource=self.ids.SourceBox))
 class DualListWindow(App):
 
     def build(self):
